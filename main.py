@@ -1,5 +1,6 @@
 import sys, pygame
 from ball.floor import Floor
+from ball.ball import Ball
 pygame.init()
 
 size = width, height = 512, 512
@@ -16,23 +17,14 @@ floor = Floor(20)
 floor.draw(screen)
 pygame.display.flip()
 
+ball = Ball()
+
 
 game = pygame.Surface((width, height - floor.height))
-ball = pygame.image.load('SoccerBall.png')
-ballrect = ball.get_rect()
-game.blit(ball, ballrect)
+#ball = pygame.image.load('SoccerBall.png')
+#ballrect = ball.get_rect()
+ball.draw(game)
 screen.blit(game, game.get_rect())
-
-
-
-
-
-## Screen setup
-#  Game - Ball
-#  Game - Ball
-#  Game - Ball
-#  Game - Ball
-#  Floor
 
 
 
@@ -41,11 +33,10 @@ while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT: sys.exit()
 
-    game.blit(ball, ballrect)
+    ball.draw(game) 
     screen.blit(game, game.get_rect())
-    ballrect = ballrect.move(speed)
-
-    
+    ball.move(game)
+    game.fill(black)
     
     pygame.display.flip()
     #pygame.display.update(ballrect)
